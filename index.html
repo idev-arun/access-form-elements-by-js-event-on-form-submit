@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Access form elements by JS event</title>
+</head>
+<body>
+	
+<form id="form">
+    <input type="text" name="fullName" value="foo bar" />
+    <input type="email" name="email" value="foo@bar.com" />
+
+    <input type="submit" />
+</form>
+
+<script type="text/javascript">
+
+	document.getElementById('form').addEventListener('submit', function (event) {
+	    event.preventDefault();
+
+	    const form = event.target;
+	    const formFields = form.elements;
+
+	    const fullNameInput = formFields.namedItem('fullName');
+	    const emailInput = formFields.item(1);
+
+	    console.log(fullNameInput.value); // output: 'foo bar'
+	    console.log(emailInput.value); // output: 'foo@bar.com'
+	}, false);
+
+	// or
+
+	/*
+	document.getElementById('form').addEventListener('submit', function (event) {
+	    event.preventDefault();
+
+	    const form = event.target;
+	    const formFields = form.elements;
+
+	    const fullNameInput = formFields.fullName;
+	    const emailInput = formFields[1];
+
+	    console.log(fullNameInput.value); // output: 'foo bar'
+	    console.log(emailInput.value); // output: 'foo@bar.com'
+	}, false);
+
+	*/	
+</script>
+</body>
+</html>
